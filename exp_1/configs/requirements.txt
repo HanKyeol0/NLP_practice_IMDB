@@ -1,0 +1,4 @@
+transformers
+wandb
+python-dotenv
+omegaconf
