@@ -46,6 +46,12 @@ Performance on **WandB**:
 | `bert-base-uncased`   | 0.0926       | 0.9778            |
 | `ModernBERT-base`     | 0.0746       | 0.9832            |
 
+Validation loss curves
+![Validation Loss](training_results/wandb_nlp_pretrain_valid_loss.png)
+
+Validation accuracy curves
+![Validation Accuracy](training_results/wandb_nlp_pretrain_valid_acc.png)
+
 ## Discussion
 As specified above, 'ModernBERT-base' outperformed 'bert-base-uncased'. Why so?
 - Architectural Improvements: Disabled bias terms, RoPE, Pre-normalization, GeGLU activation.
