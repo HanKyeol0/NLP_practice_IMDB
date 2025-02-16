@@ -47,6 +47,10 @@ Performance on **WandB**:
 | `ModernBERT-base`     | 0.0746       | 0.9832            |
 
 ## Discussion
+As specified above, 'ModernBERT-base' outperformed 'bert-base-uncased'. Why so?
+- Architectural Improvements: Disabled bias terms, RoPE, Pre-normalization, GeGLU activation.
+- Training techniques: OLMo tokenizer, sequence packing, batch size scheduling, context length extension.
+
 Conducting NLP experiments requires iterative testing with various configurations. Key best practices include:
 - **Modularization:** Organize code into reusable components for flexible experimentation.
 - **Documentation:** Maintain clear annotations for collaborative development.
