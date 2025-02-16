@@ -140,6 +140,6 @@ def main(configs : omegaconf.DictConfig, model_name):
         logger.info(f"test_loss: {avg_test_loss:.4f}, test_acc: {test_acc:.4f}")
     
 if __name__ == "__main__" :
-    model_name='bert-base-uncased'#'ModernBERT-base' # or 'bert-base-uncased'
+    model_name='ModernBERT-base' # or '' #bert-base-uncased
     configs = load_config(model=model_name)
     main(configs, model_name)

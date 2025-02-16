@@ -54,17 +54,26 @@ class IMDBDatset(torch.utils.data.Dataset):
         return len(self.data['input_ids'])
 
     @staticmethod
-    def collate_fn(batch : List[Tuple[dict, int]]) -> dict:
-        data_dict = {"input_ids": [], "token_type_ids": [], "attention_mask": [], "label": []}
+    def collate_fn(batch: List[Tuple[dict, int]]) -> dict:
+        data_dict = {"input_ids": [], "attention_mask": [], "label": []}
+
+        if 'token_type_ids' in batch[0]:
+            data_dict["token_type_ids"] = []
+
         for data in batch:
             data_dict["input_ids"].append(data["input_ids"])
-            data_dict["token_type_ids"].append(data["token_type_ids"])
             data_dict["attention_mask"].append(data["attention_mask"])
-            data_dict["label"].append(data['label'])
+            data_dict["label"].append(data["label"])
+            if "token_type_ids" in data:
+                data_dict["token_type_ids"].append(data["token_type_ids"])
+
         data_dict["input_ids"] = torch.tensor(data_dict["input_ids"])
-        data_dict["token_type_ids"] = torch.tensor(data_dict["token_type_ids"])
         data_dict["attention_mask"] = torch.tensor(data_dict["attention_mask"])
         data_dict["label"] = torch.tensor(data_dict["label"])
+
+        if "token_type_ids" in data_dict:
+            data_dict["token_type_ids"] = torch.tensor(data_dict["token_type_ids"])
+
         return data_dict
     
 def get_dataloader(data_config : omegaconf.DictConfig, split : Literal['train', 'valid', 'test']) -> torch.utils.data.DataLoader:
