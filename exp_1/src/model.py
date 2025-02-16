@@ -15,9 +15,8 @@ class EncoderForClassification(nn.Module):
         if model_config.model_name == 'bert-base-uncased':
             self.model = AutoModel.from_pretrained(model_config.model_name, attn_implementation='eager')
         elif model_config.model_name == 'answerdotai/ModernBERT-base':
-            # Load ModernBERT without FlashAttention
             config = AutoConfig.from_pretrained(model_config.model_name)
-            config._attn_implementation = "eager"  # Disable FlashAttention
+            config._attn_implementation = "eager"
             self.model = AutoModel.from_pretrained(model_config.model_name, config=config)
         self.classification_head = torch.nn.Linear(self.model.config.hidden_size, model_config.num_labels)
         self.loss_fn = torch.nn.CrossEntropyLoss()
