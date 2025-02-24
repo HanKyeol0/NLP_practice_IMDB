@@ -1,0 +1,8 @@
+model_name: "answerdotai/ModernBERT-base"
+max_len: 128
+valid_size: 0.1
+test_size: 0.1
+batch_size: 16
+num_labels: 2
+epochs: 5
+lr: 1e-5
