@@ -92,6 +92,6 @@ From the results, an effective batch size of **64** appears to be the most suita
 
 To counterbalance this, **increasing the number of epochs when using larger batch sizes** is a reasonable strategy to ensure sufficient training iterations and better convergence.
 
-Indeed, when training the model with the effective batch size of 1024 over more epochs, the performance was improved a lot:
+Indeed, when training the model with the effective batch size of 1024 over more epochs (10), the performance was improved a lot:
 - **Test Loss**: 0.2408 -> 0.1216
 - **Test Accuracy**: 0.899 -> 0.9604
