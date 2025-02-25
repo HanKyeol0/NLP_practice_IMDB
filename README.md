@@ -63,3 +63,29 @@ Conducting NLP experiments requires iterative testing with various configuration
 - **Refactoring:** Keep code concise and maintainable.
 
 This repository exemplifies best practices for model configuration, experiment tracking, and modular code design for NLP tasks.
+
+# Exp2: Gradient Accumulation & Accelerator
+
+In `main.py` and `main_accelerator.py` of the `exp_2` folder, the gradient accumulation was applied with and without Accelerator library, respectively.
+
+## Results
+| **Effective Batch Size** | **Test Loss** | **Test Accuracy** |
+|--------------------------|---------------|-------------------|
+| `64 (4 * 16)`            | 0.0787        | 0.988             |
+| `256 (4 * 64)`           | 0.0746        | 0.9832            |
+| `1024 (4 * 256)`         | 0.2408        | 0.899             |
+
+**Validation loss curves**
+![Validation Loss](exp1_training_results/wandb_nlp_pretrain_valid_loss.png)
+
+**Validation accuracy curves**
+![Validation Accuracy](exp1_training_results/wandb_nlp_pretrain_valid_acc.png)
+
+## Discussion
+From the results, an effective batch size of **64** appears to be the most suitable. While proper gradient accumulation settings improve training efficiency, excessively large batch sizes with a fixed number of epochs may lead to **undertraining**, as the model undergoes fewer updates. 
+
+To counterbalance this, **increasing the number of epochs when using larger batch sizes** is a reasonable strategy to ensure sufficient training iterations and better convergence.
+
+Indeed, when training the model with the effective batch size of 1024 over more epochs, the performance was improved a lot:
+- **Test Loss**: 0.2408 -> 0.1216
+- **Test Accuracy**: 0.899 -> 0.9604
