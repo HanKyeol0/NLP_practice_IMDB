@@ -1,9 +1,15 @@
-# NLP_practice_IMDB
-
 ## Repository Overview
-This repository contains NLP practice projects using PyTorch, focusing on sentiment analysis with the IMDB dataset. Two pre-trained models from Hugging Face are used:
+This repository contains NLP practice projects using PyTorch, focusing on sentiment analysis with the IMDB dataset. <br>
+
+In `exp_1`, **two pre-trained models** from **HuggingFace** are used:
 - **bert-base-uncased**
 - **ModernBERT-base**
+
+In `exp_2`, **gradient accumulation** was applied to the training of ModernBERT-base model from exp_1. Also, in main_accelerate, the same function of gradient accumulation was applied using **Accelerate** library from HuggingFace.
+
+In `exp_2`, **gradient accumulation** was applied to the training of the ModernBERT-base model from `exp_1`. Additionally, in `main_accelerate.py`, the same gradient accumulation technique was implemented using the Accelerate library from HuggingFace.
+
+# Exp1: NLP_practice - IMDB
 
 ## Configuration Files (`configs`)
 Each `.yaml` file contains:
@@ -47,10 +53,10 @@ Performance on **WandB**:
 | `ModernBERT-base`     | 0.0746       | 0.9832            |
 
 **Validation loss curves**
-![Validation Loss](training_results/wandb_nlp_pretrain_valid_loss.png)
+![Validation Loss](training_results/exp1_wandb_nlp_pretrain_valid_loss.png)
 
 **Validation accuracy curves**
-![Validation Accuracy](training_results/wandb_nlp_pretrain_valid_acc.png)
+![Validation Accuracy](training_results/exp1_wandb_nlp_pretrain_valid_acc.png)
 
 ## Discussion
 As specified above, 'ModernBERT-base' outperformed 'bert-base-uncased'. Why so?
@@ -76,10 +82,10 @@ In `main.py` and `main_accelerator.py` of the `exp_2` folder, the gradient accum
 | `1024 (4 * 256)`         | 0.2408        | 0.899             |
 
 **Validation loss curves**
-![Validation Loss](exp1_training_results/exp_2_valid_loss.png)
+![Validation Loss](training_results/exp_2_valid_loss.png)
 
 **Validation accuracy curves**
-![Validation Accuracy](exp1_training_results/exp_2_valid_acc.png)
+![Validation Accuracy](training_results/exp_2_valid_acc.png)
 
 ## Discussion
 From the results, an effective batch size of **64** appears to be the most suitable. While proper gradient accumulation settings improve training efficiency, excessively large batch sizes with a fixed number of epochs may lead to **undertraining**, as the model undergoes fewer updates. 
